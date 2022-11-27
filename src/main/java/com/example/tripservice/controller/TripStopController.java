@@ -1,6 +1,6 @@
 package com.example.tripservice.controller;
 
-import com.example.tripservice.model.tripstop.TripStopRequestDto;
+import com.example.tripservice.model.trip.stop.TripStopRequestDto;
 import com.example.tripservice.service.TripStopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

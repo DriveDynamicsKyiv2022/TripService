@@ -1,7 +1,7 @@
 package com.example.tripservice.service;
 
-import com.example.tripservice.model.tripstop.TripStopRequestDto;
-import com.example.tripservice.model.tripstop.TripStopResponseDto;
+import com.example.tripservice.model.trip.stop.TripStopRequestDto;
+import com.example.tripservice.model.trip.stop.TripStopResponseDto;
 import com.example.tripservice.repository.OrderRepository;
 import com.example.tripservice.repository.TrackingRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.example.tripservice.service;
 
-import com.example.tripservice.model.tripfinish.TripFinishRequestDto;
+import com.example.tripservice.model.trip.finish.TripFinishRequestDto;
 import com.example.tripservice.repository.OrderRepository;
 import com.example.tripservice.repository.TrackingRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.tripservice.model.tripgetcurrentcoordinates;
+package com.example.tripservice.model.trip.getcurrentcoordinates;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

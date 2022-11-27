@@ -1,6 +1,6 @@
 package com.example.tripservice.controller;
 
-import com.example.tripservice.model.tripgetcurrentcoordinates.TripGetCurrentCoordinatesRequestDto;
+import com.example.tripservice.model.trip.getcurrentcoordinates.TripGetCurrentCoordinatesRequestDto;
 import com.example.tripservice.service.TripGetTrackingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
