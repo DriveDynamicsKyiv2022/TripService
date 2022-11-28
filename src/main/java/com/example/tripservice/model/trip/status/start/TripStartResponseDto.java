@@ -1,4 +1,4 @@
-package com.example.tripservice.model.trip.start;
+package com.example.tripservice.model.trip.status.start;
 
 import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;

@@ -1,13 +1,13 @@
-package com.example.tripservice.service;
+package com.example.tripservice.service.status;
 
 import com.example.tripservice.model.Order;
-import com.example.tripservice.model.Tracking;
+import com.example.tripservice.model.Tracing;
 import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;
-import com.example.tripservice.model.trip.start.TripStartRequestDto;
-import com.example.tripservice.model.trip.start.TripStartResponseDto;
+import com.example.tripservice.model.trip.status.start.TripStartRequestDto;
+import com.example.tripservice.model.trip.status.start.TripStartResponseDto;
 import com.example.tripservice.repository.OrderRepository;
-import com.example.tripservice.repository.TrackingRepository;
+import com.example.tripservice.repository.TracingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 public class TripStartService {
 
     private final OrderRepository orderRepository;
-    private final TrackingRepository trackingRepository;
+    private final TracingRepository tracingRepository;
 
     @Autowired
-    public TripStartService(OrderRepository orderRepository, TrackingRepository trackingRepository) {
+    public TripStartService(OrderRepository orderRepository, TracingRepository tracingRepository) {
         this.orderRepository = orderRepository;
-        this.trackingRepository = trackingRepository;
+        this.tracingRepository = tracingRepository;
     }
 
     public TripStartResponseDto startTrip(TripStartRequestDto tripStartRequestDto) {
@@ -33,7 +33,7 @@ public class TripStartService {
 //        Longitude range (-180 to 180)
 
         Order order = createOrder(tripStartRequestDto);
-        Tracking tracking = startTracking(tripStartRequestDto, order.getId());
+        Tracing tracing = startTracing(tripStartRequestDto, order.getId());
         return new TripStartResponseDto(
                 //TODO mock car service, get car owner's userId
                 "1",
@@ -43,12 +43,12 @@ public class TripStartService {
                 order.getStatus(),
                 order.getPayment(),
                 order.getBalance(),
-                tracking.getId(),
-                tracking.getLatitude(),
-                tracking.getLongitude(),
-                tracking.getSpeed(),
-                tracking.getTimestamp(),
-                tracking.getDistance()
+                tracing.getId(),
+                tracing.getLatitude(),
+                tracing.getLongitude(),
+                tracing.getSpeed(),
+                tracing.getTimestamp(),
+                tracing.getDistance()
         );
     }
 
@@ -66,15 +66,15 @@ public class TripStartService {
         return order;
     }
 
-    private Tracking startTracking(TripStartRequestDto tripStartRequestDto, String orderId) {
-        Tracking tracking = new Tracking(
+    private Tracing startTracing(TripStartRequestDto tripStartRequestDto, String orderId) {
+        Tracing tracking = new Tracing(
                 orderId,
                 tripStartRequestDto.getLatitude(), tripStartRequestDto.getLongitude(),
                 0d,
                 0d,
                 LocalDateTime.now()
         );
-        trackingRepository.insert(tracking);
+        tracingRepository.insert(tracking);
         return tracking;
     }
 }

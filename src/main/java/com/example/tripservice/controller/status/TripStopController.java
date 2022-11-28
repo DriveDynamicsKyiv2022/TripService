@@ -1,7 +1,7 @@
-package com.example.tripservice.controller;
+package com.example.tripservice.controller.status;
 
-import com.example.tripservice.model.trip.stop.TripStopRequestDto;
-import com.example.tripservice.service.TripStopService;
+import com.example.tripservice.model.trip.status.stop.TripStopRequestDto;
+import com.example.tripservice.service.status.TripStopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;

@@ -1,6 +1,6 @@
-package com.example.tripservice.controller;
+package com.example.tripservice.controller.order;
 
-import com.example.tripservice.service.TripGetOrderService;
+import com.example.tripservice.service.order.TripGetOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

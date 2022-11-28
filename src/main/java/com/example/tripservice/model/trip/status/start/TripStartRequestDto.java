@@ -1,4 +1,4 @@
-package com.example.tripservice.model.trip.start;
+package com.example.tripservice.model.trip.status.start;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

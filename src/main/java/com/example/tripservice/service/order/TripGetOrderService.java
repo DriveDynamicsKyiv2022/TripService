@@ -1,4 +1,4 @@
-package com.example.tripservice.service;
+package com.example.tripservice.service.order;
 
 import com.example.tripservice.model.Order;
 import com.example.tripservice.model.constant.Payment;

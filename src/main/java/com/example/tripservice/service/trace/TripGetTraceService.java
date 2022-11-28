@@ -1,7 +1,7 @@
-package com.example.tripservice.service;
+package com.example.tripservice.service.trace;
 
-import com.example.tripservice.model.Tracking;
-import com.example.tripservice.repository.TrackingRepository;
+import com.example.tripservice.model.Tracing;
+import com.example.tripservice.repository.TracingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class TripGetTrackingService {
+public class TripGetTraceService {
 
-    private final TrackingRepository trackingRepository;
+    private final TracingRepository tracingRepository;
 
     @Autowired
-    public TripGetTrackingService(TrackingRepository trackingRepository) {
-        this.trackingRepository = trackingRepository;
+    public TripGetTraceService(TracingRepository tracingRepository) {
+        this.tracingRepository = tracingRepository;
     }
 
-    public Tracking getTracking(String id) {
+    public Tracing getTrace(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
-        return new Tracking(
+        return new Tracing(
                 "1",
                 0d, 0d,
                 0d,

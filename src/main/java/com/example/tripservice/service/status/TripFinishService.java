@@ -1,8 +1,8 @@
-package com.example.tripservice.service;
+package com.example.tripservice.service.status;
 
-import com.example.tripservice.model.trip.finish.TripFinishRequestDto;
+import com.example.tripservice.model.trip.status.finish.TripFinishRequestDto;
 import com.example.tripservice.repository.OrderRepository;
-import com.example.tripservice.repository.TrackingRepository;
+import com.example.tripservice.repository.TracingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 public class TripFinishService {
 
     private final OrderRepository orderRepository;
-    private final TrackingRepository trackingRepository;
+    private final TracingRepository tracingRepository;
 
     @Autowired
-    public TripFinishService(OrderRepository orderRepository, TrackingRepository trackingRepository) {
+    public TripFinishService(OrderRepository orderRepository, TracingRepository tracingRepository) {
         this.orderRepository = orderRepository;
-        this.trackingRepository = trackingRepository;
+        this.tracingRepository = tracingRepository;
     }
 
     public TripFinishRequestDto finishTrip(TripFinishRequestDto tripFinishRequestDto) {

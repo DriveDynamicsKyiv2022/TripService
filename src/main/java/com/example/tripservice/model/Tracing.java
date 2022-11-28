@@ -5,11 +5,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Document
-public class Tracking {
+public class Tracing implements Serializable {
     @Id
     private String id;
     @NonNull
@@ -25,12 +26,12 @@ public class Tracking {
     @NonNull
     private LocalDateTime timestamp;
 
-    public Tracking(String orderId,
-                    Double latitude,
-                    Double longitude,
-                    Double speed,
-                    Double distance,
-                    LocalDateTime timestamp) {
+    public Tracing(String orderId,
+                   Double latitude,
+                   Double longitude,
+                   Double speed,
+                   Double distance,
+                   LocalDateTime timestamp) {
         this.orderId = orderId;
         this.latitude = latitude;
         this.longitude = longitude;

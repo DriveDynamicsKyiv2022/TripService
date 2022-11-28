@@ -1,7 +1,7 @@
-package com.example.tripservice.controller;
+package com.example.tripservice.controller.trace;
 
 import com.example.tripservice.model.trip.getcurrentcoordinates.TripGetCurrentCoordinatesRequestDto;
-import com.example.tripservice.service.TripGetTrackingService;
+import com.example.tripservice.service.trace.TripGetTraceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TripGetCurrentCoordinatesController {
 
-    private final TripGetTrackingService tripGetTrackingService;
+    private final TripGetTraceService tripGetTraceService;
 
     /*
     Example request - 200:
@@ -31,9 +31,9 @@ Example Response - 200:
    "distance": 0.0
 }
      */
-    @GetMapping("/trip/track/current")
+    @GetMapping("/trip/trace/current")
     public ResponseEntity<?> getTracking(@RequestBody TripGetCurrentCoordinatesRequestDto requestDto) {
-        var responseBody = tripGetTrackingService.getTracking("1");
+        var responseBody = tripGetTraceService.getTrace("1");
         return ResponseEntity.ok(responseBody);
     }
 

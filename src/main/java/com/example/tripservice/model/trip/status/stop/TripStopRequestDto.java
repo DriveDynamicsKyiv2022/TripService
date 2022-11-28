@@ -1,4 +1,4 @@
-package com.example.tripservice.model.trip.stop;
+package com.example.tripservice.model.trip.status.stop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
