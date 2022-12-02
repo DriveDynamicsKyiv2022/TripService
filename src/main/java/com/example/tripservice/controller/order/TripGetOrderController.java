@@ -13,7 +13,7 @@ public class TripGetOrderController {
 
     private final TripGetOrderService tripGetOrderService;
 
-    @GetMapping("/trip/{id}")
+    @GetMapping("/trip")
     public ResponseEntity<?> getOrder(@RequestParam String id) {
         var responseBody = tripGetOrderService.getOrder(id);
         return ResponseEntity.ok(responseBody);

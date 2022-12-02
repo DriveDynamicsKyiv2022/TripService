@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TripGetTraceController {
     private final TripGetTraceService tripGetTraceService;
 
-    @GetMapping("/trip/trace/{id}")
+    @GetMapping("/trip/trace")
     public ResponseEntity<?> getTrace(@RequestParam String id) {
         var responseBody = tripGetTraceService.getTrace(id);
         return ResponseEntity.ok(responseBody);
