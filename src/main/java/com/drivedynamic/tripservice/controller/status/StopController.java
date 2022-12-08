@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-
 public class StopController {
     private final StopService stopService;
 

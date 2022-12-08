@@ -4,13 +4,15 @@ import com.drivedynamic.tripservice.model.constant.Payment;
 import com.drivedynamic.tripservice.model.constant.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-public class StartResponseDto {
+@NoArgsConstructor
+public class StartResponseDto implements Serializable {
     @NonNull
     private String ownerId;
     @NonNull

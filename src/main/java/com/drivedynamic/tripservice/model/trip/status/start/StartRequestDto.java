@@ -1,12 +1,15 @@
 package com.drivedynamic.tripservice.model.trip.status.start;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
+
 @Data
-@Document
-public class StartRequestDto {
+@NoArgsConstructor
+public class StartRequestDto implements Serializable {
     @NonNull
     private String userId;
     @NonNull
