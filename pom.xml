@@ -77,7 +77,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.tripservice.TripServiceApplication</mainClass>
+                    <mainClass>com.drivedynamic.tripservice.TripServiceApplication</mainClass>
                 </configuration>
 
                 <executions>
