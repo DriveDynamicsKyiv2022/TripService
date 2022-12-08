@@ -2,7 +2,7 @@ package com.example.tripservice.service.trace;
 
 import com.example.tripservice.model.Tracing;
 import com.example.tripservice.repository.ITracingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -10,14 +10,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class TripGetTraceService {
 
     private final ITracingRepository tracingRepository;
-
-    @Autowired
-    public TripGetTraceService(ITracingRepository tracingRepository) {
-        this.tracingRepository = tracingRepository;
-    }
 
     public Tracing getTrace(String id) {
         Query query = new Query();

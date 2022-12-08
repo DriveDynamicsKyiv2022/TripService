@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class TripGetOrderController {
-
-    @Autowired
     private final TripGetOrderService tripGetOrderService;
 
     @GetMapping("/trip")

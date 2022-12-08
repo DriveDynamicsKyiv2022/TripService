@@ -4,7 +4,7 @@ import com.example.tripservice.model.Order;
 import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;
 import com.example.tripservice.repository.IOrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -12,15 +12,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class TripGetOrderService {
-
-    @Autowired
     private final IOrderRepository orderRepository;
-
-    @Autowired
-    public TripGetOrderService(IOrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
 
     public Order getOrder(String id) {
         Query query = new Query();

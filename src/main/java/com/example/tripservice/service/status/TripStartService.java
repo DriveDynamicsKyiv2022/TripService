@@ -8,22 +8,17 @@ import com.example.tripservice.model.trip.status.start.TripStartRequestDto;
 import com.example.tripservice.model.trip.status.start.TripStartResponseDto;
 import com.example.tripservice.repository.IOrderRepository;
 import com.example.tripservice.repository.ITracingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class TripStartService {
 
     private final IOrderRepository orderRepository;
     private final ITracingRepository tracingRepository;
-
-    @Autowired
-    public TripStartService(IOrderRepository orderRepository, ITracingRepository tracingRepository) {
-        this.orderRepository = orderRepository;
-        this.tracingRepository = tracingRepository;
-    }
 
     public TripStartResponseDto startTrip(TripStartRequestDto tripStartRequestDto) {
 //        carId >= 1

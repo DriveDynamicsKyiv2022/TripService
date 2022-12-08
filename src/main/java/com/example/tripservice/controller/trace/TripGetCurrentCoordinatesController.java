@@ -1,7 +1,7 @@
 package com.example.tripservice.controller.trace;
 
 import com.example.tripservice.model.Tracing;
-import com.example.tripservice.model.trip.getcurrentcoordinates.TripGetCurrentCoordinatesRequestDto;
+import com.example.tripservice.model.trip.currentcoordinates.get.TripGetCurrentCoordinatesRequestDto;
 import com.example.tripservice.service.trace.TripGetTraceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
