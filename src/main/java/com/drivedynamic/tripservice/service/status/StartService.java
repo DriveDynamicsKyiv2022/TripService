@@ -21,12 +21,6 @@ public class StartService {
     private final ITracingRepository tracingRepository;
 
     public StartResponseDto startTrip(StartRequestDto startRequestDto) {
-//        carId >= 1
-//        userId >= 1
-//        Balance >= 10
-//        Latitude range (-90 to 90)
-//        Longitude range (-180 to 180)
-
         Order order = createOrder(startRequestDto);
         Tracing tracing = startTracing(startRequestDto, order.getId());
         return new StartResponseDto(

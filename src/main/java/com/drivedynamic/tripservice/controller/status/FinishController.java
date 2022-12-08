@@ -14,6 +14,7 @@ public class FinishController {
     private final FinishService finishService;
 
     /*
+    TODO
     URL: trip/finish
 Body:
 trafficOrderId - mandatory (trafficOrderId > 1)

@@ -5,16 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class FinishRequestDto implements Serializable {
-    /*
-trafficOrderId - mandatory (trafficOrderId > 1)
- */
     @NonNull
+    @Min(1)
     private String orderId;
 
 }

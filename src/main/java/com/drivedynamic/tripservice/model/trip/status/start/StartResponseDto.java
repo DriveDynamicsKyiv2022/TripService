@@ -27,17 +27,17 @@ public class StartResponseDto implements Serializable {
     @NonNull
     private Payment statusPaid;
     @NonNull
-    private double balance;
+    private Double balance;
     @NonNull
     private String trackId;
     @NonNull
-    private double latitude;
+    private Double latitude;
     @NonNull
-    private double longitude;
+    private Double longitude;
     @NonNull
-    private double speed;
+    private Double speed;
     @NonNull
     private LocalDateTime timestamp;
     @NonNull
-    private double distance;
+    private Double distance;
 }

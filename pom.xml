@@ -16,6 +16,15 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
@@ -69,7 +78,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <classpathDependencyExcludes>
-                        <classpathDependencyExclude>org.springframework.boot:spring-boot-starter-tomcat</classpathDependencyExclude>
+                        <classpathDependencyExclude>org.springframework.boot:spring-boot-starter-tomcat
+                        </classpathDependencyExclude>
                     </classpathDependencyExcludes>
                 </configuration>
             </plugin>

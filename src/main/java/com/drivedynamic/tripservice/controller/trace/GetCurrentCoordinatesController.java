@@ -16,6 +16,7 @@ public class GetCurrentCoordinatesController {
     private final GetTraceService getTraceService;
 
     /*
+    TODO
     Example request - 200:
 {
    "latitude" : -10,
@@ -39,6 +40,7 @@ Example Response - 200:
     }
 
     /*
+    TODO
     Example request - 404 :
 {
    "latitude" : -10,
