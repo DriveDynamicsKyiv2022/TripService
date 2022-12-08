@@ -1,8 +1,8 @@
 package com.example.tripservice.controller.status;
 
-import com.example.tripservice.model.trip.status.stop.TripStopRequestDto;
-import com.example.tripservice.model.trip.status.stop.TripStopResponseDto;
-import com.example.tripservice.service.status.TripStopService;
+import com.example.tripservice.model.trip.status.stop.StopRequestDto;
+import com.example.tripservice.model.trip.status.stop.StopResponseDto;
+import com.example.tripservice.service.status.StopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 
-public class TripStopController {
-    private final TripStopService tripStopService;
+public class StopController {
+    private final StopService stopService;
 
     /*
     Example request:
@@ -27,8 +27,8 @@ HTTP status = "OK"
 In the traffic order with trafficOrderId status set to “STOP”
      */
     @PatchMapping("/trip/stop")
-    public ResponseEntity<?> stopTrip(@RequestBody TripStopRequestDto tripStopRequestdto) {
-        TripStopResponseDto responseBody = tripStopService.stopTrip(tripStopRequestdto);
+    public ResponseEntity<?> stopTrip(@RequestBody StopRequestDto stopRequestdto) {
+        StopResponseDto responseBody = stopService.stopTrip(stopRequestdto);
         return ResponseEntity.ok(responseBody);
     }
 }

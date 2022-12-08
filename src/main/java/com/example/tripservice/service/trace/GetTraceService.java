@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class TripGetTraceService {
+public class GetTraceService {
 
     private final ITracingRepository tracingRepository;
 

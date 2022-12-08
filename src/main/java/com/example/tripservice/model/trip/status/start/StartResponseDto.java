@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class TripStartResponseDto {
+public class StartResponseDto {
     @NonNull
     private String ownerId;
     @NonNull

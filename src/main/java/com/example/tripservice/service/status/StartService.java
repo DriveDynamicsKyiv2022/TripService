@@ -4,8 +4,8 @@ import com.example.tripservice.model.Order;
 import com.example.tripservice.model.Tracing;
 import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;
-import com.example.tripservice.model.trip.status.start.TripStartRequestDto;
-import com.example.tripservice.model.trip.status.start.TripStartResponseDto;
+import com.example.tripservice.model.trip.status.start.StartRequestDto;
+import com.example.tripservice.model.trip.status.start.StartResponseDto;
 import com.example.tripservice.repository.IOrderRepository;
 import com.example.tripservice.repository.ITracingRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,25 +15,25 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class TripStartService {
+public class StartService {
 
     private final IOrderRepository orderRepository;
     private final ITracingRepository tracingRepository;
 
-    public TripStartResponseDto startTrip(TripStartRequestDto tripStartRequestDto) {
+    public StartResponseDto startTrip(StartRequestDto startRequestDto) {
 //        carId >= 1
 //        userId >= 1
 //        Balance >= 10
 //        Latitude range (-90 to 90)
 //        Longitude range (-180 to 180)
 
-        Order order = createOrder(tripStartRequestDto);
-        Tracing tracing = startTracing(tripStartRequestDto, order.getId());
-        return new TripStartResponseDto(
+        Order order = createOrder(startRequestDto);
+        Tracing tracing = startTracing(startRequestDto, order.getId());
+        return new StartResponseDto(
                 //TODO mock car service, get car owner's userId
                 "1",
-                tripStartRequestDto.getUserId(),
-                tripStartRequestDto.getCarId(),
+                startRequestDto.getUserId(),
+                startRequestDto.getCarId(),
                 order.getActivationTime(),
                 order.getStatus(),
                 order.getPayment(),
@@ -47,13 +47,13 @@ public class TripStartService {
         );
     }
 
-    private Order createOrder(TripStartRequestDto tripStartRequestDto) {
+    private Order createOrder(StartRequestDto startRequestDto) {
         Order order = new Order(
-                tripStartRequestDto.getUserId(),
-                tripStartRequestDto.getCarId(),
+                startRequestDto.getUserId(),
+                startRequestDto.getCarId(),
                 LocalDateTime.now(),
                 null,
-                tripStartRequestDto.getBalance(),
+                startRequestDto.getBalance(),
                 Status.IN_ORDER,
                 Payment.IN_PROCESS
         );
@@ -61,10 +61,10 @@ public class TripStartService {
         return order;
     }
 
-    private Tracing startTracing(TripStartRequestDto tripStartRequestDto, String orderId) {
+    private Tracing startTracing(StartRequestDto startRequestDto, String orderId) {
         Tracing tracking = new Tracing(
                 orderId,
-                tripStartRequestDto.getLatitude(), tripStartRequestDto.getLongitude(),
+                startRequestDto.getLatitude(), startRequestDto.getLongitude(),
                 0d,
                 0d,
                 LocalDateTime.now()

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class TripGetOrderService {
+public class GetOrderService {
     private final IOrderRepository orderRepository;
 
     public Order getOrder(String id) {

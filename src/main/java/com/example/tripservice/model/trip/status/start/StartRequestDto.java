@@ -6,7 +6,7 @@ import org.springframework.lang.NonNull;
 
 @Data
 @Document
-public class TripStartRequestDto {
+public class StartRequestDto {
     @NonNull
     private String userId;
     @NonNull

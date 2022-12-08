@@ -1,7 +1,7 @@
 package com.example.tripservice.controller.status;
 
-import com.example.tripservice.model.trip.status.finish.TripFinishRequestDto;
-import com.example.tripservice.service.status.TripFinishService;
+import com.example.tripservice.model.trip.status.finish.FinishRequestDto;
+import com.example.tripservice.service.status.FinishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 
-public class TripFinishController {
-    private final TripFinishService tripFinishService;
+public class FinishController {
+    private final FinishService finishService;
 
     /*
     URL: trip/finish
@@ -33,7 +33,7 @@ SEND data to another microservice
 
      */
     @PatchMapping("/trip/finish")
-    public ResponseEntity<?> finishTrip(@RequestBody TripFinishRequestDto tripFinishRequestdto) {
-        return tripFinishService.finishTrip(tripFinishRequestdto);
+    public ResponseEntity<?> finishTrip(@RequestBody FinishRequestDto finishRequestdto) {
+        return finishService.finishTrip(finishRequestdto);
     }
 }

@@ -6,7 +6,7 @@ import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
-public class TripStopRequestDto {
+public class StopRequestDto {
     /*
     trafficOrderId - mandatory (trafficOrderId > 1)
      */
