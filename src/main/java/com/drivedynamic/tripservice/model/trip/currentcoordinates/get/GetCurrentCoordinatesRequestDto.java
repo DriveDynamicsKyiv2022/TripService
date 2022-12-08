@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetCurrentCoordinatesRequestDto implements Serializable {
     /*latitude -mandatory (range -90 to 90)
     longitude - mandatory (range -180 to 180)

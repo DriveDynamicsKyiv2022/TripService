@@ -2,9 +2,11 @@ package com.drivedynamic.tripservice.model.trip.currentcoordinates.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class UpdateCurrentCoordinatesRequestDto {
     /*latitude -mandatory (range -90 to 90)

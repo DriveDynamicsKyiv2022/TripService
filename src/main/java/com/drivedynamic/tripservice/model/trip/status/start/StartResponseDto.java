@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class StartResponseDto implements Serializable {
     @NonNull
     private String ownerId;
