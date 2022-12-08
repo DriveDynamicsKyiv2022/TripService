@@ -3,7 +3,7 @@ package com.example.tripservice.service.order;
 import com.example.tripservice.model.Order;
 import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;
-import com.example.tripservice.repository.OrderRepository;
+import com.example.tripservice.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,10 +14,11 @@ import java.time.LocalDateTime;
 @Service
 public class TripGetOrderService {
 
-    private final OrderRepository orderRepository;
+    @Autowired
+    private final IOrderRepository orderRepository;
 
     @Autowired
-    public TripGetOrderService(OrderRepository orderRepository) {
+    public TripGetOrderService(IOrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 

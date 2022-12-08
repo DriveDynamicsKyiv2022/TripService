@@ -34,7 +34,6 @@ SEND data to another microservice
      */
     @PatchMapping("/trip/finish")
     public ResponseEntity<?> finishTrip(@RequestBody TripFinishRequestDto tripFinishRequestdto) {
-        var responseBody = tripFinishService.finishTrip(tripFinishRequestdto);
-        return ResponseEntity.ok(responseBody);
+        return tripFinishService.finishTrip(tripFinishRequestdto);
     }
 }

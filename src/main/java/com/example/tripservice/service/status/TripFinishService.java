@@ -1,24 +1,25 @@
 package com.example.tripservice.service.status;
 
 import com.example.tripservice.model.trip.status.finish.TripFinishRequestDto;
-import com.example.tripservice.repository.OrderRepository;
-import com.example.tripservice.repository.TracingRepository;
+import com.example.tripservice.repository.IOrderRepository;
+import com.example.tripservice.repository.ITracingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TripFinishService {
 
-    private final OrderRepository orderRepository;
-    private final TracingRepository tracingRepository;
+    private final IOrderRepository orderRepository;
+    private final ITracingRepository tracingRepository;
 
     @Autowired
-    public TripFinishService(OrderRepository orderRepository, TracingRepository tracingRepository) {
+    public TripFinishService(IOrderRepository orderRepository, ITracingRepository tracingRepository) {
         this.orderRepository = orderRepository;
         this.tracingRepository = tracingRepository;
     }
 
-    public TripFinishRequestDto finishTrip(TripFinishRequestDto tripFinishRequestDto) {
-        return new TripFinishRequestDto("1");
+    public ResponseEntity finishTrip(TripFinishRequestDto tripFinishRequestDto) {
+        return ResponseEntity.ok().build();
     }
 }

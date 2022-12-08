@@ -1,5 +1,6 @@
 package com.example.tripservice.controller.trace;
 
+import com.example.tripservice.model.Tracing;
 import com.example.tripservice.service.trace.TripGetTraceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ public class TripGetTraceController {
 
     @GetMapping("/trip/trace")
     public ResponseEntity<?> getTrace(@RequestParam String id) {
-        var responseBody = tripGetTraceService.getTrace(id);
+        Tracing responseBody = tripGetTraceService.getTrace(id);
         return ResponseEntity.ok(responseBody);
     }
 }

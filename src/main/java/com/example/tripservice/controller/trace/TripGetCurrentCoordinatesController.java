@@ -1,5 +1,6 @@
 package com.example.tripservice.controller.trace;
 
+import com.example.tripservice.model.Tracing;
 import com.example.tripservice.model.trip.getcurrentcoordinates.TripGetCurrentCoordinatesRequestDto;
 import com.example.tripservice.service.trace.TripGetTraceService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ Example Response - 200:
      */
     @GetMapping("/trip/trace/current")
     public ResponseEntity<?> getTracking(@RequestBody TripGetCurrentCoordinatesRequestDto requestDto) {
-        var responseBody = tripGetTraceService.getTrace("1");
+        Tracing responseBody = tripGetTraceService.getTrace("1");
         return ResponseEntity.ok(responseBody);
     }
 

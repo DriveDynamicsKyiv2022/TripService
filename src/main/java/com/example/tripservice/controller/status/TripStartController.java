@@ -1,6 +1,7 @@
 package com.example.tripservice.controller.status;
 
 import com.example.tripservice.model.trip.status.start.TripStartRequestDto;
+import com.example.tripservice.model.trip.status.start.TripStartResponseDto;
 import com.example.tripservice.service.status.TripStartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class TripStartController {
 
     @PostMapping("/trip/start")
     public ResponseEntity<?> startTrip(@RequestBody TripStartRequestDto orderStartRequestdto) {
-        var responseBody = tripStartService.startTrip(orderStartRequestdto);
+        TripStartResponseDto responseBody = tripStartService.startTrip(orderStartRequestdto);
         return ResponseEntity.ok(responseBody);
     }
 

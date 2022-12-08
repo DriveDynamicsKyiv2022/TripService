@@ -6,8 +6,8 @@ import com.example.tripservice.model.constant.Payment;
 import com.example.tripservice.model.constant.Status;
 import com.example.tripservice.model.trip.status.start.TripStartRequestDto;
 import com.example.tripservice.model.trip.status.start.TripStartResponseDto;
-import com.example.tripservice.repository.OrderRepository;
-import com.example.tripservice.repository.TracingRepository;
+import com.example.tripservice.repository.IOrderRepository;
+import com.example.tripservice.repository.ITracingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @Service
 public class TripStartService {
 
-    private final OrderRepository orderRepository;
-    private final TracingRepository tracingRepository;
+    private final IOrderRepository orderRepository;
+    private final ITracingRepository tracingRepository;
 
     @Autowired
-    public TripStartService(OrderRepository orderRepository, TracingRepository tracingRepository) {
+    public TripStartService(IOrderRepository orderRepository, ITracingRepository tracingRepository) {
         this.orderRepository = orderRepository;
         this.tracingRepository = tracingRepository;
     }
