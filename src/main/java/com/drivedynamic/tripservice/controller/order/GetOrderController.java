@@ -14,7 +14,7 @@ public class GetOrderController {
     private final GetOrderService getOrderService;
 
     @GetMapping("/trip")
-    public ResponseEntity<?> getOrder(@RequestParam String id) {
+    public ResponseEntity<?> getOrder(@RequestParam String id) throws Exception {
         Order responseBody = getOrderService.getOrder(id);
         return ResponseEntity.ok(responseBody);
     }
