@@ -14,20 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class StopController {
     private final StopService stopService;
 
-    /*
-    TODO
-    Example request:
-{
-   "trafficOrderId" : 45
-}
-
-Example response:
-HTTP status = "OK"
-
-In the traffic order with trafficOrderId status set to “STOP”
-     */
     @PatchMapping("/trip/stop")
-    public ResponseEntity<?> stopTrip(@RequestBody StopRequestDto stopRequestdto) {
+    public ResponseEntity<?> stopTrip(@RequestBody StopRequestDto stopRequestdto) throws Exception {
         StopResponseDto responseBody = stopService.stopTrip(stopRequestdto);
         return ResponseEntity.ok(responseBody);
     }
