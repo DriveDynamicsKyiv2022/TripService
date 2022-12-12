@@ -17,8 +17,12 @@ import java.util.Objects;
 @EnableMongoRepositories(basePackages = "com.drivedynamics.tripservice.repository")
 public class MongoConfig {
 
+    private final Environment env;
+
     @Autowired
-    Environment env;
+    public MongoConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public MongoClient mongo() {
