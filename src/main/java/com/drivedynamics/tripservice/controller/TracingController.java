@@ -6,6 +6,7 @@ import com.drivedynamics.tripservice.model.trip.currentcoordinates.update.Update
 import com.drivedynamics.tripservice.service.TracingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Pattern;
+
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/trip/trace")
@@ -55,18 +59,18 @@ Example Response - 404:
     //-----
 
     @GetMapping("/current")
-    public ResponseEntity<?> getCurrentTrace(@RequestBody GetCurrentCoordinatesRequestDto requestDto) {
+    public ResponseEntity<?> getCurrentTrace(@Validated @RequestBody GetCurrentCoordinatesRequestDto requestDto) {
         Tracing responseBody = tracingService.getCurrentTrace(requestDto);
         return ResponseEntity.ok(responseBody);
     }
 
     @PostMapping("/current/update")
-    public ResponseEntity<?> updateCurrentTrace(@RequestBody UpdateCurrentCoordinatesRequestDto requestDto) {
+    public ResponseEntity<?> updateCurrentTrace(@Validated @RequestBody UpdateCurrentCoordinatesRequestDto requestDto) {
         return tracingService.updateCurrentTrace(requestDto);
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> getTrace(@RequestParam String id) throws Exception {
+    public ResponseEntity<?> getTrace(@Pattern(regexp = "[a-z0-9]{1,24}") @RequestParam String id) throws Exception {
         Tracing responseBody = tracingService.getTrace(id);
         return ResponseEntity.ok(responseBody);
     }

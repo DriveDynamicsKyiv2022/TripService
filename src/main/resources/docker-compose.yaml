@@ -1,8 +1,10 @@
+#mvn jasypt:encrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yaml"
+#mvn jasypt:decrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yaml"
 version: "3.8"
 services:
   app:
     build:
-      context: .
+      context: ../../..
       dockerfile: DockerFile_app
     container_name: demo_app
     image: demo_image

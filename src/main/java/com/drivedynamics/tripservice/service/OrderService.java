@@ -1,6 +1,7 @@
 package com.drivedynamics.tripservice.service;
 
 import com.drivedynamics.tripservice.config.MongoConfig;
+import com.drivedynamics.tripservice.exception.ValidationException;
 import com.drivedynamics.tripservice.model.Order;
 import com.drivedynamics.tripservice.model.Tracing;
 import com.drivedynamics.tripservice.model.constant.Payment;
@@ -18,6 +19,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.time.LocalDateTime;
 
@@ -43,7 +45,8 @@ public class OrderService {
         return new MongoConfig().mongoTemplate().find(query, Order.class).get(0);
     }
 
-    public StartResponseDto startTrip(StartRequestDto startRequestDto) {
+    public StartResponseDto startTrip(StartRequestDto startRequestDto, BindingResult errors) {
+        checkValidationErrors(errors);
         Order order = createOrder(startRequestDto);
         Tracing tracing = startTracing(startRequestDto, order.getId());
         return new StartResponseDto(
@@ -90,7 +93,8 @@ public class OrderService {
         return tracking;
     }
 
-    public StopResponseDto stopTrip(StopRequestDto stopRequestDto) throws Exception {
+    public StopResponseDto stopTrip(StopRequestDto stopRequestDto, BindingResult errors) throws Exception {
+        checkValidationErrors(errors);
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(stopRequestDto.getOrderId()));
         Update update = new Update();
@@ -99,7 +103,8 @@ public class OrderService {
         return new StopResponseDto();
     }
 
-    public ResponseEntity finishTrip(FinishRequestDto finishRequestDto) throws Exception {
+    public ResponseEntity finishTrip(FinishRequestDto finishRequestDto, BindingResult errors) throws Exception {
+        checkValidationErrors(errors);
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(finishRequestDto.getOrderId()));
         Update update = new Update();
@@ -110,5 +115,11 @@ public class OrderService {
         //SEND data to another microservice
         new MongoConfig().mongoTemplate().updateFirst(query, update, Order.class);
         return ResponseEntity.ok().build();
+    }
+
+    private void checkValidationErrors(BindingResult errors) throws ValidationException {
+        if (errors.hasErrors()) {
+            throw new ValidationException(errors);
+        }
     }
 }

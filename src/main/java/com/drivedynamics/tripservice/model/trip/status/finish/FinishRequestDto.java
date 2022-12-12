@@ -15,5 +15,4 @@ public class FinishRequestDto implements Serializable {
     @NonNull
     @Min(1)
     private String orderId;
-
 }
