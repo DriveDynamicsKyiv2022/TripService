@@ -22,5 +22,4 @@ public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandle
     public ResponseEntity<Object> handle(ConstraintViolationException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-
 }

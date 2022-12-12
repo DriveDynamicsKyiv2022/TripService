@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TracingService {
     private final ITracingRepository tracingRepository;
+    private final MongoConfig mongoConfig;
 
     //TODO
     //Example response (object from DB) - 200 :
@@ -31,7 +32,7 @@ Example response - 404
     public Tracing getTrace(String id) throws Exception {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return new MongoConfig().mongoTemplate().find(query, Tracing.class).get(0);
+        return mongoConfig.mongoTemplate().find(query, Tracing.class).get(0);
     }
 
     public Tracing getCurrentTrace(GetCurrentCoordinatesRequestDto getCurrentCoordinatesRequestDto) {

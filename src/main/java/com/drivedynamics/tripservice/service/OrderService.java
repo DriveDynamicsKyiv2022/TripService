@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 public class OrderService {
     private final IOrderRepository orderRepository;
     private final ITracingRepository tracingRepository;
+    private final MongoConfig mongoConfig;
 
     //TODO
     //Example response (object from DB) - 200 :
@@ -42,7 +43,7 @@ public class OrderService {
     public Order getOrder(String id) throws Exception {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return new MongoConfig().mongoTemplate().find(query, Order.class).get(0);
+        return mongoConfig.mongoTemplate().find(query, Order.class).get(0);
     }
 
     public StartResponseDto startTrip(StartRequestDto startRequestDto, BindingResult errors) {
@@ -99,7 +100,7 @@ public class OrderService {
         query.addCriteria(Criteria.where("_id").is(stopRequestDto.getOrderId()));
         Update update = new Update();
         update.set("status", Status.STOPPED);
-        new MongoConfig().mongoTemplate().updateFirst(query, update, Order.class);
+        mongoConfig.mongoTemplate().updateFirst(query, update, Order.class);
         return new StopResponseDto();
     }
 
@@ -113,7 +114,7 @@ public class OrderService {
         //TODO
         //Calculate balance after trip
         //SEND data to another microservice
-        new MongoConfig().mongoTemplate().updateFirst(query, update, Order.class);
+        mongoConfig.mongoTemplate().updateFirst(query, update, Order.class);
         return ResponseEntity.ok().build();
     }
 
