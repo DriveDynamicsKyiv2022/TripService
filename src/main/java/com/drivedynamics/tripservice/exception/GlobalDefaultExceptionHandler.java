@@ -14,12 +14,12 @@ import javax.validation.ConstraintViolationException;
 public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Object> handle(ValidationException ex, WebRequest request) throws Exception {
+    public ResponseEntity<Object> handle(ValidationException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> handle(ConstraintViolationException ex, WebRequest request) throws Exception {
+    public ResponseEntity<Object> handle(ConstraintViolationException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
