@@ -33,7 +33,7 @@ public class MongoConfig {
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongo(), "mongotest");
+    public MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongo(), Objects.requireNonNull(env.getProperty("spring.data.mongodb.database")));
     }
 }
