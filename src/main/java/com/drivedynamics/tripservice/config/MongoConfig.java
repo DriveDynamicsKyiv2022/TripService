@@ -1,5 +1,6 @@
 package com.drivedynamics.tripservice.config;
 
+import com.drivedynamics.tripservice.model.constant.ApplicationStrings;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -14,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import java.util.Objects;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.drivedynamics.tripservice.repository")
+@EnableMongoRepositories(basePackages = ApplicationStrings.Constants.PACKAGE_REPOSITORY_VALUE)
 public class MongoConfig {
 
     private final Environment env;
@@ -27,7 +28,11 @@ public class MongoConfig {
     @Bean
     public MongoClient mongo() {
         ConnectionString connectionString = new ConnectionString(
-                Objects.requireNonNull(env.getProperty("spring.data.mongodb.uri"))
+                Objects.requireNonNull(
+                        env.getProperty(
+                                ApplicationStrings.Constants.PROPERTY_NAME_SPRING_DATA_MONGODB_URI_VALUE
+                        )
+                )
         );
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
@@ -38,6 +43,13 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongo(), Objects.requireNonNull(env.getProperty("spring.data.mongodb.database")));
+        return new MongoTemplate(
+                mongo(),
+                Objects.requireNonNull(
+                        env.getProperty(
+                                ApplicationStrings.Constants.PROPERTY_NAME_SPRING_DATA_MONGODB_DATABASE_VALUE
+                        )
+                )
+        );
     }
 }
