@@ -1,4 +1,4 @@
-package com.drivedynamics.tripservice.model;
+package com.drivedynamics.tripservice.model.document;
 
 import com.drivedynamics.tripservice.model.constant.Payment;
 import com.drivedynamics.tripservice.model.constant.Status;

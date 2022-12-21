@@ -1,7 +1,7 @@
 package com.drivedynamics.tripservice.service;
 
 import com.drivedynamics.tripservice.config.MongoConfig;
-import com.drivedynamics.tripservice.model.Trace;
+import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.dto.CoordinatesRequestDto;
 import com.drivedynamics.tripservice.repository.ITraceRepository;
 import lombok.RequiredArgsConstructor;

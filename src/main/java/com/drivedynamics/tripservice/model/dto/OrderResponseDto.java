@@ -1,7 +1,7 @@
 package com.drivedynamics.tripservice.model.dto;
 
-import com.drivedynamics.tripservice.model.Order;
-import com.drivedynamics.tripservice.model.Trace;
+import com.drivedynamics.tripservice.model.document.Order;
+import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.constant.Payment;
 import com.drivedynamics.tripservice.model.constant.Status;
 import lombok.Data;

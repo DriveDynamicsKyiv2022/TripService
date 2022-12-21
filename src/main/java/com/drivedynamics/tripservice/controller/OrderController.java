@@ -1,7 +1,8 @@
 package com.drivedynamics.tripservice.controller;
 
+import com.drivedynamics.tripservice.annotation.IdPattern;
 import com.drivedynamics.tripservice.exception.ValidationException;
-import com.drivedynamics.tripservice.model.Order;
+import com.drivedynamics.tripservice.model.document.Order;
 import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
 import com.drivedynamics.tripservice.model.dto.OrderResponseDto;
 import com.drivedynamics.tripservice.service.OrderService;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 @Validated
@@ -36,19 +36,19 @@ public class OrderController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getOrder(@Pattern(regexp = "[a-z0-9]{1,24}") @PathVariable String id) {
+    public ResponseEntity<?> getOrder(@IdPattern @PathVariable String id) {
         Optional<Order> responseBody = orderService.getOrder(id);
         return ResponseEntity.ok(responseBody);
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<?> updateOrder(@Pattern(regexp = "[a-z0-9]{1,24}") @PathVariable String id) {
+    public ResponseEntity<?> updateOrder(@IdPattern @PathVariable String id) {
         Order responseBody = orderService.updateOrder(id);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> finishOrder(@Pattern(regexp = "[a-z0-9]{1,24}") @PathVariable String id) {
+    public ResponseEntity<?> finishOrder(@IdPattern @PathVariable String id) {
         //TODO
         //validate existence
         return orderService.finishOrder(id);

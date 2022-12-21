@@ -1,4 +1,4 @@
-package com.drivedynamics.tripservice.model;
+package com.drivedynamics.tripservice.model.document;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

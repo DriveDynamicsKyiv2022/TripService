@@ -1,6 +1,6 @@
 package com.drivedynamics.tripservice.controller;
 
-import com.drivedynamics.tripservice.model.Trace;
+import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.dto.CoordinatesRequestDto;
 import com.drivedynamics.tripservice.service.TraceService;
 import lombok.RequiredArgsConstructor;
