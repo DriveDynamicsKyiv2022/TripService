@@ -1,4 +1,4 @@
-package com.drivedynamics.tripservice.model.trip.currentcoordinates.get;
+package com.drivedynamics.tripservice.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetCurrentCoordinatesRequestDto implements Serializable {
+public final class CoordinatesRequestDto implements Serializable {
+    private static final long serialVersionUID = 3L;
     @NonNull
     @DecimalMin("-90.0")
     @DecimalMax("90.0")

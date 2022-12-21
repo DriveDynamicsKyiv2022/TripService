@@ -9,8 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@Document
-public class Tracing implements Serializable {
+@Document(collection = "traces")
+public final class Trace implements Serializable {
+    private static final long serialVersionUID = 5L;
     @Id
     private String id;
     @NonNull
@@ -26,12 +27,12 @@ public class Tracing implements Serializable {
     @NonNull
     private LocalDateTime timestamp;
 
-    public Tracing(String orderId,
-                   Double latitude,
-                   Double longitude,
-                   Double speed,
-                   Double distance,
-                   LocalDateTime timestamp) {
+    public Trace(String orderId,
+                 Double latitude,
+                 Double longitude,
+                 Double speed,
+                 Double distance,
+                 LocalDateTime timestamp) {
         this.orderId = orderId;
         this.latitude = latitude;
         this.longitude = longitude;

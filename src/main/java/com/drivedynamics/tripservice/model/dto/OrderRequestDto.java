@@ -1,6 +1,5 @@
-package com.drivedynamics.tripservice.model.trip.status.start;
+package com.drivedynamics.tripservice.model.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -11,8 +10,8 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class StartRequestDto implements Serializable {
+public final class OrderRequestDto implements Serializable {
+    private static final long serialVersionUID = 2L;
     @NonNull
     private String userId;
     @NonNull

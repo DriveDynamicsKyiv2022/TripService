@@ -12,8 +12,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@Document
-public class Order implements Serializable {
+@Document(collection = "orders")
+public final class Order implements Serializable {
+    private static final long serialVersionUID = 4L;
     @Id
     private String id;
     @NonNull

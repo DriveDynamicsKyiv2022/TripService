@@ -1,10 +1,9 @@
 package com.drivedynamics.tripservice.service;
 
 import com.drivedynamics.tripservice.config.MongoConfig;
-import com.drivedynamics.tripservice.model.Tracing;
-import com.drivedynamics.tripservice.model.trip.currentcoordinates.get.GetCurrentCoordinatesRequestDto;
-import com.drivedynamics.tripservice.model.trip.currentcoordinates.update.UpdateCurrentCoordinatesRequestDto;
-import com.drivedynamics.tripservice.repository.ITracingRepository;
+import com.drivedynamics.tripservice.model.Trace;
+import com.drivedynamics.tripservice.model.dto.CoordinatesRequestDto;
+import com.drivedynamics.tripservice.repository.ITraceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,8 +14,8 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class TracingService {
-    private final ITracingRepository tracingRepository;
+public class TraceService {
+    private final ITraceRepository traceRepository;
     private final MongoConfig mongoConfig;
 
     //TODO
@@ -29,14 +28,14 @@ Example response - 404
    "timestamp": 1659616544946
 }
      */
-    public Tracing getTrace(String id) throws Exception {
+    public Trace getTrace(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return mongoConfig.mongoTemplate().find(query, Tracing.class).get(0);
+        return mongoConfig.mongoTemplate().find(query, Trace.class).get(0);
     }
 
-    public Tracing getCurrentTrace(GetCurrentCoordinatesRequestDto getCurrentCoordinatesRequestDto) {
-        return new Tracing(
+    public Trace getCurrentTrace(CoordinatesRequestDto requestDto) {
+        return new Trace(
                 "1",
                 0d, 0d,
                 0d,
@@ -45,7 +44,7 @@ Example response - 404
         );
     }
 
-    public ResponseEntity updateCurrentTrace(UpdateCurrentCoordinatesRequestDto requestDto) {
+    public ResponseEntity updateCurrentTrace(CoordinatesRequestDto coordinatesRequestDto) {
         return ResponseEntity.ok().build();
     }
 

@@ -3,17 +3,15 @@ package com.drivedynamics.tripservice.service;
 import com.drivedynamics.tripservice.config.MongoConfig;
 import com.drivedynamics.tripservice.exception.ValidationException;
 import com.drivedynamics.tripservice.model.Order;
-import com.drivedynamics.tripservice.model.Tracing;
+import com.drivedynamics.tripservice.model.Trace;
 import com.drivedynamics.tripservice.model.constant.Payment;
 import com.drivedynamics.tripservice.model.constant.Status;
-import com.drivedynamics.tripservice.model.trip.status.finish.FinishRequestDto;
-import com.drivedynamics.tripservice.model.trip.status.start.StartRequestDto;
-import com.drivedynamics.tripservice.model.trip.status.start.StartResponseDto;
-import com.drivedynamics.tripservice.model.trip.status.stop.StopRequestDto;
-import com.drivedynamics.tripservice.model.trip.status.stop.StopResponseDto;
+import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
+import com.drivedynamics.tripservice.model.dto.OrderResponseDto;
 import com.drivedynamics.tripservice.repository.IOrderRepository;
-import com.drivedynamics.tripservice.repository.ITracingRepository;
+import com.drivedynamics.tripservice.repository.ITraceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -22,13 +20,49 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
+    private static final FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
     private final IOrderRepository orderRepository;
-    private final ITracingRepository tracingRepository;
+    private final ITraceRepository traceRepository;
     private final MongoConfig mongoConfig;
+
+    public OrderResponseDto createOrder(OrderRequestDto orderRequestDto, BindingResult errors) {
+        checkValidationErrors(errors);
+        Order order = createOrder(orderRequestDto);
+        Trace trace = createTrace(orderRequestDto, order.getId());
+        //TODO mock car service, get car owner's userId
+        return new OrderResponseDto(order.getId(), "1", orderRequestDto, order, trace);
+    }
+
+    private Order createOrder(OrderRequestDto orderRequestDto) {
+        Order order = new Order(
+                orderRequestDto.getUserId(),
+                orderRequestDto.getCarId(),
+                LocalDateTime.now(),
+                null,
+                orderRequestDto.getBalance(),
+                Status.IN_ORDER,
+                Payment.IN_PROCESS
+        );
+        orderRepository.insert(order);
+        return order;
+    }
+
+    private Trace createTrace(OrderRequestDto orderRequestDto, String orderId) {
+        Trace tracking = new Trace(
+                orderId,
+                orderRequestDto.getLatitude(), orderRequestDto.getLongitude(),
+                0d,
+                0d,
+                LocalDateTime.now()
+        );
+        traceRepository.insert(tracking);
+        return tracking;
+    }
 
     //TODO
     //Example response (object from DB) - 200 :
@@ -40,81 +74,28 @@ public class OrderService {
 }
      */
 
-    public Order getOrder(String id) throws Exception {
+    public Optional<Order> getOrder(String id) {
+        return orderRepository.findById(id);
+    }
+
+    public Order updateOrder(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return mongoConfig.mongoTemplate().find(query, Order.class).get(0);
-    }
-
-    public StartResponseDto startTrip(StartRequestDto startRequestDto, BindingResult errors) {
-        checkValidationErrors(errors);
-        Order order = createOrder(startRequestDto);
-        Tracing tracing = startTracing(startRequestDto, order.getId());
-        return new StartResponseDto(
-                //TODO mock car service, get car owner's userId
-                "1",
-                startRequestDto.getUserId(),
-                startRequestDto.getCarId(),
-                order.getActivationTime(),
-                order.getStatus(),
-                order.getPayment(),
-                order.getBalance(),
-                tracing.getId(),
-                tracing.getLatitude(),
-                tracing.getLongitude(),
-                tracing.getSpeed(),
-                tracing.getTimestamp(),
-                tracing.getDistance()
-        );
-    }
-
-    private Order createOrder(StartRequestDto startRequestDto) {
-        Order order = new Order(
-                startRequestDto.getUserId(),
-                startRequestDto.getCarId(),
-                LocalDateTime.now(),
-                null,
-                startRequestDto.getBalance(),
-                Status.IN_ORDER,
-                Payment.IN_PROCESS
-        );
-        orderRepository.insert(order);
-        return order;
-    }
-
-    private Tracing startTracing(StartRequestDto startRequestDto, String orderId) {
-        Tracing tracking = new Tracing(
-                orderId,
-                startRequestDto.getLatitude(), startRequestDto.getLongitude(),
-                0d,
-                0d,
-                LocalDateTime.now()
-        );
-        tracingRepository.insert(tracking);
-        return tracking;
-    }
-
-    public StopResponseDto stopTrip(StopRequestDto stopRequestDto, BindingResult errors) throws Exception {
-        checkValidationErrors(errors);
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(stopRequestDto.getOrderId()));
         Update update = new Update();
         update.set("status", Status.STOPPED);
-        mongoConfig.mongoTemplate().updateFirst(query, update, Order.class);
-        return new StopResponseDto();
+        return mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class);
     }
 
-    public ResponseEntity finishTrip(FinishRequestDto finishRequestDto, BindingResult errors) throws Exception {
-        checkValidationErrors(errors);
+    public ResponseEntity<?> finishOrder(String id) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(finishRequestDto.getOrderId()));
+        query.addCriteria(Criteria.where("_id").is(id));
         Update update = new Update();
         update.set("completionTime", LocalDateTime.now());
         update.set("status", Status.FINISHED);
         //TODO
         //Calculate balance after trip
         //SEND data to another microservice
-        mongoConfig.mongoTemplate().updateFirst(query, update, Order.class);
+        mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class);
         return ResponseEntity.ok().build();
     }
 
