@@ -1,6 +1,6 @@
 package com.drivedynamics.tripservice.controller;
 
-import com.drivedynamics.tripservice.annotation.IdPattern;
+import com.drivedynamics.tripservice.annotation.IdStringConstraint;
 import com.drivedynamics.tripservice.exception.ValidationException;
 import com.drivedynamics.tripservice.model.document.Order;
 import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
@@ -36,19 +36,19 @@ public class OrderController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getOrder(@IdPattern @PathVariable String id) {
+    public ResponseEntity<?> getOrder(@PathVariable @IdStringConstraint String id) {
         Optional<Order> responseBody = orderService.getOrder(id);
         return ResponseEntity.ok(responseBody);
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<?> updateOrder(@IdPattern @PathVariable String id) {
+    public ResponseEntity<?> updateOrder(@PathVariable @IdStringConstraint String id) {
         Order responseBody = orderService.updateOrder(id);
         return ResponseEntity.ok(responseBody);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> finishOrder(@IdPattern @PathVariable String id) {
+    public ResponseEntity<?> finishOrder(@PathVariable @IdStringConstraint String id) {
         //TODO
         //validate existence
         return orderService.finishOrder(id);
