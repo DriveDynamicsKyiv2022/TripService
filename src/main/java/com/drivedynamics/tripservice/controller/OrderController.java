@@ -1,6 +1,7 @@
 package com.drivedynamics.tripservice.controller;
 
 import com.drivedynamics.tripservice.annotation.IdStringConstraint;
+import com.drivedynamics.tripservice.exception.NoSuchOrderException;
 import com.drivedynamics.tripservice.exception.ValidationException;
 import com.drivedynamics.tripservice.model.document.Order;
 import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
@@ -38,19 +39,21 @@ public class OrderController {
     @GetMapping("{id}")
     public ResponseEntity<?> getOrder(@PathVariable @IdStringConstraint String id) {
         Optional<Order> responseBody = orderService.getOrder(id);
-        return ResponseEntity.ok(responseBody);
+        return ResponseEntity.ok(responseBody.orElseThrow(
+                () -> new NoSuchOrderException("There's no order with such id: " + id))
+        );
     }
 
     @PatchMapping("{id}")
     public ResponseEntity<?> updateOrder(@PathVariable @IdStringConstraint String id) {
-        Order responseBody = orderService.updateOrder(id);
-        return ResponseEntity.ok(responseBody);
+        Optional<Order> responseBody = Optional.ofNullable(orderService.updateOrder(id));
+        return ResponseEntity.ok(responseBody.orElseThrow(
+                () -> new NoSuchOrderException("There's no order with such id: " + id))
+        );
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> finishOrder(@PathVariable @IdStringConstraint String id) {
-        //TODO
-        //validate existence
         return orderService.finishOrder(id);
     }
 }

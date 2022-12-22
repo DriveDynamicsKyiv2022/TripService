@@ -1,11 +1,12 @@
 package com.drivedynamics.tripservice.service;
 
 import com.drivedynamics.tripservice.config.MongoConfig;
+import com.drivedynamics.tripservice.exception.NoSuchOrderException;
 import com.drivedynamics.tripservice.exception.ValidationException;
-import com.drivedynamics.tripservice.model.document.Order;
-import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.constant.Payment;
 import com.drivedynamics.tripservice.model.constant.Status;
+import com.drivedynamics.tripservice.model.document.Order;
+import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
 import com.drivedynamics.tripservice.model.dto.OrderResponseDto;
 import com.drivedynamics.tripservice.repository.IOrderRepository;
@@ -95,7 +96,9 @@ public class OrderService {
         //TODO
         //Calculate balance after trip
         //SEND data to another microservice
-        mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class);
+        if (mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class) == null) {
+            throw new NoSuchOrderException("There's no order with such id: " + id);
+        }
         return ResponseEntity.ok().build();
     }
 

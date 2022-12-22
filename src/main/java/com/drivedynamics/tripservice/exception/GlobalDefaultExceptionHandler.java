@@ -18,6 +18,11 @@ public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandle
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler(NoSuchOrderException.class)
+    public ResponseEntity<Object> handle(NoSuchOrderException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handle(ConstraintViolationException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
