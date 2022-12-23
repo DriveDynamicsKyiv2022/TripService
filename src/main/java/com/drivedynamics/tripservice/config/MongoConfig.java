@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import java.util.Objects;
 
 @Configuration
-@EnableMongoRepositories(basePackages = ApplicationStrings.Constants.PACKAGE_REPOSITORY_VALUE)
+@EnableMongoRepositories(basePackages = ApplicationStrings.PACKAGE_REPOSITORY_VALUE)
 public class MongoConfig {
 
     private final Environment env;
@@ -30,7 +30,7 @@ public class MongoConfig {
         ConnectionString connectionString = new ConnectionString(
                 Objects.requireNonNull(
                         env.getProperty(
-                                ApplicationStrings.Constants.PROPERTY_NAME_SPRING_DATA_MONGODB_URI_VALUE
+                                ApplicationStrings.PROPERTY_NAME_SPRING_DATA_MONGODB_URI_VALUE
                         )
                 )
         );
@@ -47,7 +47,7 @@ public class MongoConfig {
                 mongo(),
                 Objects.requireNonNull(
                         env.getProperty(
-                                ApplicationStrings.Constants.PROPERTY_NAME_SPRING_DATA_MONGODB_DATABASE_VALUE
+                                ApplicationStrings.PROPERTY_NAME_SPRING_DATA_MONGODB_DATABASE_VALUE
                         )
                 )
         );

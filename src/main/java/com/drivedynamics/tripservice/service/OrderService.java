@@ -65,16 +65,6 @@ public class OrderService {
         return tracking;
     }
 
-    //TODO
-    //Example response (object from DB) - 200 :
-    /*
-    Example response - 404
-{
-   "message": "TrafficOrder with id wasn`t found",
-   "timestamp": 1659616274765
-}
-     */
-
     public Optional<Order> getOrder(String id) {
         return orderRepository.findById(id);
     }
@@ -82,6 +72,7 @@ public class OrderService {
     public Order updateOrder(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
+        query.addCriteria(Criteria.where("status").is(Status.IN_ORDER));
         Update update = new Update();
         update.set("status", Status.STOPPED);
         return mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class);
@@ -90,6 +81,7 @@ public class OrderService {
     public ResponseEntity<?> finishOrder(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
+        query.addCriteria(Criteria.where("status").ne(Status.FINISHED));
         Update update = new Update();
         update.set("completionTime", LocalDateTime.now());
         update.set("status", Status.FINISHED);
@@ -97,7 +89,7 @@ public class OrderService {
         //Calculate balance after trip
         //SEND data to another microservice
         if (mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class) == null) {
-            throw new NoSuchOrderException("There's no order with such id: " + id);
+            throw new NoSuchOrderException(String.format("There's no unfinished order with such '%s' id", id));
         }
         return ResponseEntity.ok().build();
     }

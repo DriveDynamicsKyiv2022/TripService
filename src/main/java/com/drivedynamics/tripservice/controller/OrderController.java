@@ -3,6 +3,7 @@ package com.drivedynamics.tripservice.controller;
 import com.drivedynamics.tripservice.annotation.IdStringConstraint;
 import com.drivedynamics.tripservice.exception.NoSuchOrderException;
 import com.drivedynamics.tripservice.exception.ValidationException;
+import com.drivedynamics.tripservice.model.constant.Status;
 import com.drivedynamics.tripservice.model.document.Order;
 import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
 import com.drivedynamics.tripservice.model.dto.OrderResponseDto;
@@ -39,21 +40,25 @@ public class OrderController {
     @GetMapping("{id}")
     public ResponseEntity<?> getOrder(@PathVariable @IdStringConstraint String id) {
         Optional<Order> responseBody = orderService.getOrder(id);
-        return ResponseEntity.ok(responseBody.orElseThrow(
-                () -> new NoSuchOrderException("There's no order with such id: " + id))
-        );
+        return getOkResponseOrThrowException(responseBody, id, "There's no order with such '%s' id");
     }
 
     @PatchMapping("{id}")
     public ResponseEntity<?> updateOrder(@PathVariable @IdStringConstraint String id) {
         Optional<Order> responseBody = Optional.ofNullable(orderService.updateOrder(id));
-        return ResponseEntity.ok(responseBody.orElseThrow(
-                () -> new NoSuchOrderException("There's no order with such id: " + id))
-        );
+        return getOkResponseOrThrowException(responseBody, id,
+                "There's no order with such '%s' id and " + Status.IN_ORDER.name() + " status");
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> finishOrder(@PathVariable @IdStringConstraint String id) {
         return orderService.finishOrder(id);
+    }
+
+    private ResponseEntity<?> getOkResponseOrThrowException(Optional<Order> responseBody, String id,
+                                                            String exceptionMessage) {
+        return ResponseEntity.ok(
+                responseBody.orElseThrow(() -> new NoSuchOrderException(String.format(exceptionMessage, id)))
+        );
     }
 }
