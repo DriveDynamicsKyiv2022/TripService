@@ -47,7 +47,7 @@ public class OrderController {
     public ResponseEntity<?> updateOrder(@PathVariable @IdStringConstraint String id) {
         Optional<Order> responseBody = Optional.ofNullable(orderService.updateOrder(id));
         return getOkResponseOrThrowException(responseBody, id,
-                "There's no order with such '%s' id and " + Status.IN_ORDER.name() + " status");
+                "There's no order with such '%s' id and '" + Status.IN_ORDER.name() + "' status");
     }
 
     @DeleteMapping("{id}")
