@@ -1,5 +1,6 @@
 package com.drivedynamics.tripservice.controller;
 
+import com.drivedynamics.tripservice.annotation.IdStringConstraint;
 import com.drivedynamics.tripservice.model.document.Trace;
 import com.drivedynamics.tripservice.model.dto.CoordinatesRequestDto;
 import com.drivedynamics.tripservice.service.TraceService;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.Pattern;
 
 @Validated
 @RestController
@@ -69,7 +68,7 @@ Example Response - 404:
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getTrace(@Pattern(regexp = "[a-z0-9]{1,24}") @PathVariable String id) {
+    public ResponseEntity<?> getTrace(@PathVariable @IdStringConstraint String id) {
         Trace responseBody = traceService.getTrace(id);
         return ResponseEntity.ok(responseBody);
     }
