@@ -20,6 +20,10 @@
             <name>Jasypt Repository</name>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+        <repository>
+            <id>space-drive-dynamic-shared-objects</id>
+            <url>https://maven.pkg.jetbrains.space/java-internship/p/drivedynamic/drive-dynamic-shared-objects</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -32,6 +36,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.griddynamics</groupId>
+            <artifactId>drive-dynamics-shared-objects</artifactId>
+            <version>0.1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
