@@ -22,17 +22,20 @@ public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandle
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<Object> handle(ValidationException ex, WebRequest request) {
-        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),400,"Bad Request"), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),400,"Bad Request"),
+                headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(NoSuchOrderException.class)
     public ResponseEntity<Object> handle(NoSuchOrderException ex, WebRequest request) {
-        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),404,"Not Found"), headers, HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),404,"Not Found"),
+                headers, HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handle(ConstraintViolationException ex, WebRequest request) {
-        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),400,"Bad Request"), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, getResponseObject(ex.getMessage(),400,"Bad Request"),
+                headers, HttpStatus.BAD_REQUEST, request);
     }
 
     private ErrorResponse getResponseObject(String message, int status, String error) {

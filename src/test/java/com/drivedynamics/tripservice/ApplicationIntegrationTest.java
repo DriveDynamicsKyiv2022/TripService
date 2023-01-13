@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class AplicationIntegrationTest {
+class ApplicationIntegrationTest {
 
     @Test
     void contextLoads(ApplicationContext context) {
