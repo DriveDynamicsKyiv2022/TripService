@@ -7,8 +7,8 @@ for container_id in $(docker ps -q); do
   docker kill "$container_id"
 done
 echo "--------rebuild---------"
-docker-compose -f docker-compose.yaml build --no-cache
+docker-compose -f docker-compose.yml build --no-cache
 echo "--------restart---------"
-docker-compose -f docker-compose.yaml up -d
+docker-compose -f docker-compose.yml up -d
 exit
 exit
