@@ -1,5 +1,5 @@
-#mvn jasypt:encrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yaml"
-#mvn jasypt:decrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yaml"
+#mvn jasypt:encrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yml"
+#mvn jasypt:decrypt -Djasypt.encryptor.password={PASSWORD} -Djasypt.plugin.path="file:src/main/resources/docker-compose.yml"
 version: "3.8"
 services:
   mongoservice:
@@ -16,7 +16,9 @@ services:
     depends_on:
       - mongoservice
     build:
+      context: .
       dockerfile: Dockerfile
+    container_name: trip-service
     image: demo_image
     ports:
       - "8085:8085"
