@@ -34,7 +34,9 @@ public class BuildingUtils {
                     .withFunctionName("get-tariff-lambda");
             AWSLambda lambda = AWSLambdaClientBuilder.defaultClient();
             InvokeResult invokeResult = lambda.invoke(invokeRequest);
-            return new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8);
+            String result = new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8);
+            System.out.println(result);
+            return result;
         } catch (ServiceException e) {
             throw new RuntimeException("Problems with connectivity");
         }
