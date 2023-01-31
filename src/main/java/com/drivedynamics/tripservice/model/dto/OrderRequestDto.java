@@ -13,9 +13,9 @@ import java.io.Serializable;
 public final class OrderRequestDto implements Serializable {
     private static final long serialVersionUID = 2L;
     @NonNull
-    private String userId;
+    private long userId;
     @NonNull
-    private String carId;
+    private long carId;
     @NonNull
     @DecimalMin("10.0")
     private Double balance;

@@ -18,9 +18,9 @@ public final class Order implements Serializable {
     @Id
     private String id;
     @NonNull
-    private String userId;
+    private Long userId;
     @NonNull
-    private String carId;
+    private Long carId;
     @NonNull
     private LocalDateTime activationTime;
     @Nullable
@@ -32,8 +32,8 @@ public final class Order implements Serializable {
     @NonNull
     private Payment payment;
 
-    public Order(String userId,
-                 String carId,
+    public Order(Long userId,
+                 Long carId,
                  LocalDateTime activationTime,
                  LocalDateTime completionTime,
                  Double balance,

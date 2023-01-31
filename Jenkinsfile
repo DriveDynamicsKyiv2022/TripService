@@ -12,8 +12,8 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh 'sudo -S scp -v -o StrictHostKeyChecking=no -i ~/trip-service-key-pair-personal.pem target/ROOT.war docker-compose.yaml ' +
-                        'Dockerfile ec2-user@ec2-3-8-90-32.eu-west-2.compute.amazonaws.com:~'
-                sh 'sudo -S ssh -i ~/trip-service-key-pair-personal.pem ec2-user@ec2-3-8-90-32.eu-west-2.compute.amazonaws.com \'bash -s\' < update-server.sh'
+                        'Dockerfile ubuntu@ec2-18-156-178-29.eu-central-1.compute.amazonaws.com:~'
+                sh 'sudo -S ssh -i ~/backoffice-bastion-key-pair-personal.pem ubuntu@ec2-18-156-178-29.eu-central-1.compute.amazonaws.com \'bash -s\' < update-server.sh'
             }
         }
     }

@@ -20,9 +20,9 @@ public final class OrderResponseDto implements Serializable {
     @NonNull
     private String ownerId;
     @NonNull
-    private String userId;
+    private long userId;
     @NonNull
-    private String carId;
+    private long carId;
     @NonNull
     private LocalDateTime activationTime;
     @NonNull

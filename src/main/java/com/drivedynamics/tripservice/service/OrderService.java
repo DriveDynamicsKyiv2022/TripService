@@ -11,6 +11,7 @@ import com.drivedynamics.tripservice.model.dto.OrderRequestDto;
 import com.drivedynamics.tripservice.model.dto.OrderResponseDto;
 import com.drivedynamics.tripservice.repository.IOrderRepository;
 import com.drivedynamics.tripservice.repository.ITraceRepository;
+import com.drivedynamics.tripservice.utils.BuildingUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -30,6 +31,7 @@ public class OrderService {
     private final IOrderRepository orderRepository;
     private final ITraceRepository traceRepository;
     private final MongoConfig mongoConfig;
+    private final IMessagingService messagingService;
 
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto, BindingResult errors) {
         checkValidationErrors(errors);
@@ -88,9 +90,11 @@ public class OrderService {
         //TODO
         //Calculate balance after trip
         //SEND data to another microservice
-        if (mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class) == null) {
+        Order result = mongoConfig.mongoTemplate().findAndModify(query, update, options, Order.class);
+        if (result == null) {
             throw new NoSuchOrderException(String.format("There's no unfinished order with such '%s' id", id));
         }
+        messagingService.sendOrderToBackoffice(BuildingUtils.toDto(result));
         return ResponseEntity.ok().build();
     }
 
