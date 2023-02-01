@@ -19,7 +19,7 @@ public class BuildingUtils {
                 .carId(order.getCarId())
                 .orderId(order.getId())
                 .userId(order.getUserId())
-                .carBodyStyle(CarBodyStyle.values()[random.nextInt(CarBodyStyle.values().length - 1)])
+                .carBodyStyle(CarBodyStyle.values()[random.nextInt(CarBodyStyle.values().length)])
                 .endDateTime(order.getCompletionTime())
                 .startDateTime(order.getActivationTime())
                 .price(order.getBalance())
