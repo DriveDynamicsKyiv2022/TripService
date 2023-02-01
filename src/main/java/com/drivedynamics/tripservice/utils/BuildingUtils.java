@@ -9,7 +9,6 @@ import com.drivedynamics.tripservice.model.document.Order;
 import com.griddynamics.car.enums.CarBodyStyle;
 import com.griddynamics.order.OrderDto;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class BuildingUtils {
@@ -34,8 +33,8 @@ public class BuildingUtils {
                     .withFunctionName("get-tariff-lambda");
             AWSLambda lambda = AWSLambdaClientBuilder.defaultClient();
             InvokeResult invokeResult = lambda.invoke(invokeRequest);
-            String result = new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8);
-            System.out.println(result);
+            String result = new String(invokeResult.getPayload().array());
+            System.out.println("--------" + result);
             return result;
         } catch (ServiceException e) {
             throw new RuntimeException("Problems with connectivity");
