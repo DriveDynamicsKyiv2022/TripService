@@ -34,9 +34,9 @@ public class BuildingUtils {
             AWSLambda lambda = AWSLambdaClientBuilder.defaultClient();
             InvokeResult invokeResult = lambda.invoke(invokeRequest);
             String result = new String(invokeResult.getPayload().array());
-            result = result.replace('"', '\0');
+            result = result.replace("\"", "");
             System.out.println("--------" + result);
-            return result;
+            return result.trim();
         } catch (ServiceException e) {
             throw new RuntimeException("Problems with connectivity");
         }
