@@ -34,6 +34,7 @@ public class BuildingUtils {
             AWSLambda lambda = AWSLambdaClientBuilder.defaultClient();
             InvokeResult invokeResult = lambda.invoke(invokeRequest);
             String result = new String(invokeResult.getPayload().array());
+            result = result.replace('"', '\0');
             System.out.println("--------" + result);
             return result;
         } catch (ServiceException e) {
