@@ -21,7 +21,7 @@ services:
     container_name: trip-service
     image: demo_image
     ports:
-      - "8085:8085"
+      - "8080:8080"
     restart: on-failure
     links:
       - mongoservice
